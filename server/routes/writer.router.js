@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 // console.log('authenticated user GET server route for Archive view:', req.isAuthenticated());
 // console.log('writerGET req.user is:', req.user);
 if(req.isAuthenticated()){
-let queryText = 'SELECT "story"."id", "story", "writer_id", "username", "state_usa", "inappropriate" FROM "writer" JOIN "story" ON "story"."writer_id" = "writer"."id" WHERE "writer"."id" = $1 ORDER BY "story"."id" DESC;';
+let queryText = 'SELECT "story"."id", "story", "writer_id", "username", "inappropriate" FROM "writer" JOIN "story" ON "story"."writer_id" = "writer"."id" WHERE "writer"."id" = $1 ORDER BY "story"."id" DESC;';
 pool.query(queryText, [req.user.id])
 .then((result)=> {
   res.send(result.rows);

@@ -9,7 +9,7 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
 // console.log('unauthenticated user GET route for Landing page');
-let queryText = 'SELECT "story"."id", "story", "writer_id", "username", "state_usa", "inappropriate" FROM "story" JOIN "writer" ON "writer"."id" = "story"."writer_id" ORDER BY "story"."id" ASC;';
+let queryText = 'SELECT "story"."id", "story", "writer_id", "username", "inappropriate" FROM "story" JOIN "writer" ON "writer"."id" = "story"."writer_id" ORDER BY "story"."id" ASC;';
 pool.query(queryText)
 .then((result)=> {
   res.send(result.rows);
