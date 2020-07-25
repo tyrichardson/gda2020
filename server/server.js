@@ -10,6 +10,8 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const readerRouter = require('./routes/reader.router');
+const writerRouter = require('./routes/writer.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -23,7 +25,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
+//user is for login/reg; reader is for unauthenticated landing page; writer is for all logged-in user views
 app.use('/api/user', userRouter);
+app.use('/api/reader', readerRouter);
+app.use('/api/writer', writerRouter);
 
 // Serve static files
 app.use(express.static('build'));
