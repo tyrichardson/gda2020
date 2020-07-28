@@ -3,11 +3,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
-
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
-
 import ArchivePageList from './ArchivePageList';
 import FavoritesPageList from './FavoritesPageList';
 
@@ -20,7 +15,6 @@ const mapStateToProps = state => ({
 class ArchivePage extends Component {
   
   componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     this.props.dispatch({
       type:'GET_WRITER_STORIES_SAGA'
     });
@@ -29,36 +23,25 @@ class ArchivePage extends Component {
     })
   }
 
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
-    }
-  }
-
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    this.props.history.push('home');
-  }
-
   render() {
   
-    const archivePageList = this.props.state.getWriterStoriesReducer.map((story) => {
+    const archivePageList = this.props.state.getWriterStories.map((story) => {
       return (<ArchivePageList key={story.id} story={story}/>)
     })
 
-    const favoritesPageList = this.props.state.getFavoritesReducer.map((story) => {
+    const favoritesPageList = this.props.state.getFavorites.map((story) => {
       return (<FavoritesPageList key={story.id} story={story}/>)
     })
 
     let content = null;
 
-    if (this.props.user.userName) {
+    if (this.props.state.user.username) {
       content = (
         <div>
 
           <div id="welcome">
             <h3>
-              Welcome to your Archive page, { this.props.user.userName }!
+              Welcome to your Archive page, { this.props.state.user.userName }!
             </h3>
           </div>
 
@@ -77,7 +60,6 @@ class ArchivePage extends Component {
 
     return (
       <div>
-        <Nav />
         { content }
       </div>
     );

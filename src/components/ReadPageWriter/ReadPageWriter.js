@@ -3,10 +3,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
-
 import ReadPageWriterList from './ReadPageWriterList';
 
 const mapStateToProps = state => ({
@@ -16,38 +12,26 @@ const mapStateToProps = state => ({
 
 class ReadPageWriter extends Component {
   componentDidMount() {
-    this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.props.dispatch({
       type:'GET_STORIES'
   });
 }
 
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
-    }
-  }
-
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    this.props.history.push('home');
-  }
-
   render() {
 
-    const readPageWriterList = this.props.state.getResponseReducer.reverse().map((story) => {
+    const readPageWriterList = this.props.state.getResponse.reverse().map((story) => {
       return (<ReadPageWriterList key={story.id} story={story}/>)
     })
 
     let content = null;
 
-    if (this.props.user.userName) {
+    if (this.props.state.user.username) {
       content = (
         <div>
 
           <div id="welcome">
             <h3>
-              Welcome to the Read page, {this.props.user.userName }!
+              Welcome to the Read page, {this.props.state.user.username }!
             </h3>
           </div>
 
@@ -60,7 +44,6 @@ class ReadPageWriter extends Component {
 
     return (
       <div>
-        <Nav />
         { content }
       </div>
     );

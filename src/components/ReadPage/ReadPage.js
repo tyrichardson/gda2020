@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
 import ReadPageList from './ReadPageList';
 
 const mapStateToProps = state => ({
@@ -19,13 +18,12 @@ class ReadPage extends Component {
   }
 
   render() {
-    let readPageList = this.props.state.getResponseReducer.map((story) => {
+    let readPageList = this.props.state.getResponse.reverse().map((story) => {
       return (<ReadPageList key={story.id} story={story}/>)
     })
 
     return (
       <div>
-        <Nav />
           { readPageList }
       </div>
     );

@@ -7,27 +7,31 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      {!props.state.user.username ? <h2 className="nav-title">Good Deeds Anonymous</h2> : <h2 className="nav-title">Good Deeds Anonymous welcomes you, {props.state.user.username}</h2> }
     </Link>
+
     <div className="nav-right">
       <Link className="nav-link" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
+        {props.user.id ? 'Write' : 'Login / Register'}
       </Link>
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
-            Info Page
+          <Link className="nav-link" to="/memberReadingPage">
+             Read
+          </Link>
+          <Link className="nav-link" to="/archive">
+            Archive
           </Link>
           <LogOutButton className="nav-link"/>
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
+      <Link className="nav-link" to="/readPage">
+        Public Page
       </Link>
     </div>
   </div>
@@ -40,6 +44,7 @@ const Nav = (props) => (
 // const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
+  state
 });
 
 export default connect(mapStateToProps)(Nav);

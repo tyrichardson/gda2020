@@ -4,30 +4,13 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import swal from 'sweetalert';
 
-import Nav from '../../components/Nav/Nav';
-
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
-
-
 const mapStateToProps = state => ({
-  user: state.user,
   state
 });
 
 class WritePage extends Component {
   state = {
     newStory: '',
-  }
-
-  componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-  }
-
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
-    }
   }
 
   handleChange = (event) => {
@@ -50,21 +33,16 @@ class WritePage extends Component {
     });
 }
 
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
-  }
-
   render() {
     let content = null;
 
-    if (this.props.user.userName) {
+    if(this.props.state.user.username) {
       content = (
         <div className="container">
 
           <div id="welcome">
             <h3>
-              Welcome to the Write page, { this.props.user.userName }!
+              Welcome to the Write page, {this.props.state.user.username}!
             </h3>
           </div>
 
@@ -83,7 +61,6 @@ class WritePage extends Component {
 
     return (
       <div>
-        <Nav />
         { content }
       </div>
     );

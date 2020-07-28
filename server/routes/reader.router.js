@@ -4,11 +4,11 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
- * GET for Landing/Read page, unauthenticated users access
+ * GET for Public Page, unauthenticated users access
  * story.id = 1 is the first story, the Landing page display
  */
 router.get('/', (req, res) => {
-// console.log('unauthenticated user GET route for Landing page');
+console.log('unauthenticated user GET route for Landing page');
 let queryText = 'SELECT "story"."id", "story", "writer_id", "username", "inappropriate" FROM "story" JOIN "writer" ON "writer"."id" = "story"."writer_id" ORDER BY "story"."id" ASC;';
 pool.query(queryText)
 .then((result)=> {
@@ -19,12 +19,5 @@ pool.query(queryText)
   res.sendStatus(500);
 }); 
 });
-
-/**
- * POST route template
- */
-// router.post('/', (req, res) => {
-
-// });
 
 module.exports = router;
