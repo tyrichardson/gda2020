@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 
 import ReadPageList from './ReadPageList';
 
-import './ReadPage.css';
-
 const mapStateToProps = state => ({
   state
 });

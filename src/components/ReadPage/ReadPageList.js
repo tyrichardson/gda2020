@@ -1,9 +1,6 @@
 //this captures each item from the array that is mapped over and returns each separate array element as an item rendered on the DOM
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GoogleMap from '../GoogleMap/GoogleMap';
-
-
 
 // import PropTypes from 'prop-types';
 // import { withStyles } from 'material-ui/styles';
@@ -22,7 +19,6 @@ class ReadPageList extends Component {
     return (
       <div id="readStory">
           <div>{this.props.story.story}</div>
-          <GoogleMap />
       </div>
     );
   }

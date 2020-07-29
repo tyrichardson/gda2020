@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import swal from 'sweetalert';
 
+import GoogleMap from '../GoogleMap/GoogleMap';
+import '../GoogleMap/GoogleMap.css';
+
 const mapStateToProps = state => ({
   state
 });
@@ -62,6 +65,7 @@ class WritePage extends Component {
     return (
       <div>
         { content }
+        <GoogleMap />
       </div>
     );
   }
