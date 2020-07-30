@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({ state });
 
-class GoogleMap extends Component {
+class GoogleMapStatic extends Component {
 
   googleMapRef = createRef();
 
@@ -13,7 +13,7 @@ class GoogleMap extends Component {
     window.document.body.appendChild(googleMapScript);
     googleMapScript.addEventListener("load", () => {
       this.googleMap = this.createGoogleMap();
-     // this.marker = this.createMarker();
+      this.marker = this.createMarker();
     });
   }
 
@@ -23,7 +23,7 @@ class GoogleMap extends Component {
 
   createGoogleMap = () =>
     new window.google.maps.Map(this.googleMapRef.current, {
-      zoom: 4,
+      zoom: 6,
       center: {
         lat: this.city.center.lat,
         lng: this.city.center.lng,
@@ -37,7 +37,7 @@ class GoogleMap extends Component {
       fullscreenControl: true,
     });
 
-/*
+  
   createMarker = () =>
     {
        new window.google.maps.Circle({
@@ -52,7 +52,7 @@ class GoogleMap extends Component {
     });
     console.log(this.url, this.value);
   }
-  */
+  
 
   render() {
 
@@ -66,4 +66,4 @@ class GoogleMap extends Component {
   }
 }
 
-export default connect(mapStateToProps)(GoogleMap);
+export default connect(mapStateToProps)(GoogleMapStatic);

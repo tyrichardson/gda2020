@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 
 import GoogleMap from '../GoogleMap/GoogleMap';
 import '../GoogleMap/GoogleMap.css';
+import './WritePage.css';
 
 const mapStateToProps = state => ({
   state
@@ -14,25 +15,27 @@ const mapStateToProps = state => ({
 class WritePage extends Component {
   state = {
     newStory: '',
+    zipcode: '',
   }
 
-  handleChange = (event) => {
+  handleChangeFor = propertyName => (event) => {
     this.setState({
-      newStory: event.target.value,
+      [propertyName]: event.target.value,
     });
-
   }
+
   handleClick = (event) => {
     event.preventDefault();
     swal("Click Read to see your story. Click Archive to edit your story.");
     ReactDOM.findDOMNode(this.refs.textarea).focus();
-    console.log('click publish button:', this.state.newStory);
+    console.log('click publish button:', this.state.newStory, this.state.zipcode);
     this.props.dispatch({
       type: "POST_STORY",
       payload: this.state
     });
     this.setState({
-      newStory: ''
+      newStory: '',
+      zipcode: '',
     });
 }
 
@@ -45,17 +48,34 @@ class WritePage extends Component {
 
           <div id="welcome">
             <h3>
-              Welcome to the Write page, {this.props.state.user.username}!
+              {this.props.state.user.username}'s writing page
             </h3>
           </div>
 
-          <div id="storyTextArea">
-            <textarea ref="textarea" value={this.state.newStory} onChange={this.handleChange} autoFocus row="4" cols="12" placeholder="type your story here">
+          <div id="zipcodeInputDiv">
+            <input id="zipcodeInput"
+              type="text"
+              name="zipcode"
+              value={this.state.zipcode}
+              onChange={this.handleChangeFor('zipcode')}
+              autoFocus
+              placeholder="The story's zipcode?"
+            ></input>
+          </div>
+
+          <div id="storyTextAreaDiv">
+            <textarea id="storyTextArea" 
+              ref="textarea" 
+              value={this.state.newStory} 
+              onChange={this.handleChangeFor('newStory')} 
+              row="4" 
+              cols="12" 
+              placeholder="The story of your good deed?">
             </textarea>
           </div>
 
           <div id="publishDiv">
-            <button id="publishButton" type="submit" onClick={this.handleClick}>Publish</button>
+            <button id="publishButton" type="button" onClick={this.handleClick}>Publish your story</button>
           </div>
 
         </div>

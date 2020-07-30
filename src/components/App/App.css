@@ -1,6 +1,26 @@
+html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0px;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    background-color: lightskyblue;
+}
+
+#wrapper {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: aliceblue;
 }
 
 .alert {
@@ -10,16 +30,15 @@ body {
 
 .formRegister, .formLogin {
     background-color: #dbd5d5;
-    width: 40%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
+    width: 60%;
+    height: 20rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: .5rem;
 }
 
 input {
-    margin: 5px;
-    margin-bottom: 10px;
+    margin: .5rem;
 }
 
 .log-in, .log-out, .register {
@@ -28,6 +47,7 @@ input {
   color: #f8f8f8;
   min-height: 50px;
   min-width: 100px;
+  margin: 1rem;
   outline:0;
   cursor: pointer;
 }

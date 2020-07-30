@@ -8,7 +8,9 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; Prime Digital Academy
+    <h5>Attributions</h5>
+    <p className="footerP">longitude and longitude provided via zipcode from: <br />
+    <a href="http://public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/api">public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/api</a></p>
   </footer>
 );
 

@@ -5,6 +5,7 @@ import user from './userReducer';
 import getFavorites from './getFavoritesReducer';
 import getResponse from './getResponseReducer';
 import getWriterStories from './getWriterStoriesReducer';
+import zipcodeState from './zipcodeState';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   getFavorites,
   getResponse,
   getWriterStories,
+  zipcodeState,
 });
 
 export default rootReducer;

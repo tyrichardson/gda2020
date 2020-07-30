@@ -6,9 +6,11 @@ import './Nav.css';
 
 const Nav = (props) => (
   <div className="nav">
+    <div>
     <Link to="/home">
-      {!props.state.user.username ? <h2 className="nav-title">Good Deeds Anonymous</h2> : <h2 className="nav-title">Good Deeds Anonymous welcomes you, {props.state.user.username}</h2> }
+      {!props.state.user.username ? <h2 className="nav-title">Good Deeds Anonymous</h2> : <h2 className="nav-title">Good Deeds Anonymous USA welcomes you, {props.state.user.username}</h2> }
     </Link>
+    </div>
 
     <div className="nav-right">
       <Link className="nav-link" to="/home">
@@ -31,7 +33,7 @@ const Nav = (props) => (
       )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/readPage">
-        Public Page
+        Public
       </Link>
     </div>
   </div>

@@ -28,7 +28,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div id="wrapper">
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
