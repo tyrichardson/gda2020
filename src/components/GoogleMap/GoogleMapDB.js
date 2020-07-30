@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({ state });
 
-class GoogleMapStatic extends Component {
+class GoogleMapDB extends Component {
 
   googleMapRef = createRef();
 
@@ -66,4 +66,4 @@ class GoogleMapStatic extends Component {
   }
 }
 
-export default connect(mapStateToProps)(GoogleMapStatic);
+export default connect(mapStateToProps)(GoogleMapDB);

@@ -19,7 +19,7 @@ class ReadPage extends Component {
 
   render() {
     let readPageList = this.props.state.getResponse.reverse().map((story) => {
-      return (<ReadPageList key={story.id} story={story}/>)
+      return (<ReadPageList key={story.id} story={story} zipcode={story.zipcode}/>)
     })
 
     return (

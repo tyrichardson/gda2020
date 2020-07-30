@@ -18,7 +18,7 @@ class ReadPageList extends Component {
 
     return (
       <div id="readStory">
-          <div>{this.props.story.story}</div>
+          <div>{this.props.story.story} and {this.props.story.zipcode}</div>
       </div>
     );
   }

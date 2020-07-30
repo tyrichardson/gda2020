@@ -10,7 +10,6 @@ import getSaga from './getSaga';
 import getWriterStoriesSaga from './getWriterStoriesSaga';
 import postSaga from './postSaga';
 import putEditStorySaga from './putEditStorySaga';
-import zipcodeStateSaga from './zipcodeStateSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -32,6 +31,5 @@ export default function* rootSaga() {
     getWriterStoriesSaga(),
     postSaga(),
     putEditStorySaga(),
-    zipcodeStateSaga(),
   ]);
 }

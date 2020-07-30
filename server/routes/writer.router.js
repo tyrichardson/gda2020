@@ -61,8 +61,8 @@ router.get('/favorites', (req, res) => {
 router.post('/', (req, res) => {
   // console.log('authenticated user POST server route for WriterPage', req.body);
   if(req.isAuthenticated()) {
-    const queryText = 'INSERT INTO "story" (story, writer_id, zipcode) VALUES ($1, $2, $3);';
-    pool.query(queryText, [req.body.newStory, req.user.id, req.body.zipcode])
+    const queryText = 'INSERT INTO "story" (story, writer_id, zipcode, lat, long) VALUES ($1, $2, $3, $4, $5);';
+    pool.query(queryText, [req.body.newStory, req.user.id, req.body.zipcode, req.body.lat, req.body.long])
     .then((result) => {
       res.sendStatus(201);
     }).catch((error) => {
