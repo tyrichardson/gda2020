@@ -1,72 +1,137 @@
-// The ArchivePage has two panes. The pane on the left is a list of the stories published by the logged-in user only, from which the logged-in user can select to Edit or Delete stories they have published. The pane on the right is a list of stories the logged in user has Favorited; the logged-in use can select to Unfavorite items on this list. In the future, there will be a pane for an Admin to follow up on stories for possible deletion, stories flagged as inappropriate by x number of users.
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ArchivePageList from './ArchivePageList';
-import FavoritesPageList from './FavoritesPageList';
+import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide} from 'swiper/react';
 
+import 'swiper/swiper-bundle.css';
+import '../ReadPage/ReadPage.css';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
 const mapStateToProps = state => ({
-  user: state.user,
   state
 });
 
 class ArchivePage extends Component {
+
+  state = {
+    editing: false,
+    text: this.props.state.getResponse.story,
+    newText: '',
+  };
   
   componentDidMount() {
     this.props.dispatch({
       type:'GET_WRITER_STORIES_SAGA'
     });
+  }
+
+  handleDelete = (story) => {
+    console.log('clicked delete button', story);
     this.props.dispatch({
-      type:'GET_FAVORITES'
+      type: 'DELETE_ARCHIVE_STORY',
+      payload: story.id
     })
   }
+
+  handleEdit = () => {
+    console.log('clicked edit button');
+    this.setState({
+      editing: !this.state.editing
+    })
+  }
+
+  handleSave = (story) => {
+    let val = this.refs.newText.value;
+    this.setState({
+      newText: val,
+      editing: false
+    },() => {
+      console.log('newText val, this.state, from Edit button:', this.state);
+      let newEdit = {
+        story: this.state.newText, id: story.id, writer_id: story.writer_id
+      };
+      console.log('newEdit for PUT payload:', newEdit);
+      this.props.dispatch({
+        type: "EDIT_STORY_PUT",
+        payload: newEdit
+      });
+    })
+  }
+  
+  // Upon dispatch, payload: {preEditStory: this.props.story, edit: this.state.text }
 
   render() {
-  
-    const archivePageList = this.props.state.getWriterStories.map((story) => {
-      return (<ArchivePageList key={story.id} story={story}/>)
-    })
 
-    const favoritesPageList = this.props.state.getFavorites.map((story) => {
-      return (<FavoritesPageList key={story.id} story={story}/>)
-    })
-
-    let content = null;
-
-    if (this.props.state.user.username) {
-      content = (
-        <div>
-
-          <div id="welcome">
-            <h3>
-              Welcome to your Archive page, { this.props.state.user.userName }!
-            </h3>
-          </div>
-
-          <section id="writerStories">
-            <h4>Your Stories</h4>
-            { archivePageList }
-          </section>
-
-          <section id="favorites">
-            <h4>Your Favorites</h4>
-            { favoritesPageList }
-          </section>
-        </div>
-      );
-    } 
-
+  if (this.state.editing) {
     return (
       <div>
-        { content }
+      <div id="welcome">
+        <h3>
+          {this.props.state.user.username }'s archive page in editing mode
+        </h3>
       </div>
-    );
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          loop
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log('slide change')}
+        >
+        {this.props.state.getWriterStories.reverse().map((story) => {
+        return (
+          <SwiperSlide key={story.id}>
+            <div className="readPageSlideDiv" >
+              <textarea ref="newText" defaultValue={story.story}></textarea>
+              <button onClick={() => this.handleSave(story)}>Save</button>
+              <button onClick={() => this.handleEdit()}>Cancel</button>
+            </div>
+          </SwiperSlide>
+          )
+          })}
+        </Swiper>
+      </div>
+    )
+  } else {
+      return (
+        <div>
+        <div id="welcome">
+          <h3>
+            {this.props.state.user.username }'s archive page
+          </h3>
+        </div>
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          loop
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log('slide change')}
+        >
+        {this.props.state.getWriterStories.reverse().map((story) => {
+        return (
+          <SwiperSlide key={story.id}>
+            <div className="readPageSlideDiv" >
+              <p>{story.id}</p>
+              <p>{story.story}</p>
+              <button onClick={() => this.handleDelete(story)}>Delete</button>
+              <button onClick={() => this.handleEdit()}>Edit</button>
+            </div>
+          </SwiperSlide>
+          )
+          })}
+        </Swiper>
+        </div>
+      );
+    }
   }
 }
-
-
 
 // this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(ArchivePage);

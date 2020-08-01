@@ -17,6 +17,7 @@ import ArchivePage from '../ArchivePage/ArchivePage';
 import ReadPage from '../ReadPage/ReadPage';
 import ReadPageWriter from '../ReadPageWriter/ReadPageWriter';
 import WritePage from '../WritePage/WritePage';
+import FavoritesPage from '../FavoritesPage/FavoritesPage';
 
 import './App.css';
 
@@ -55,6 +56,11 @@ class App extends Component {
               exact
               path="/archive"
               component={ArchivePage}
+            />
+            <ProtectedRoute
+              exact
+              path="/favorites"
+              component={FavoritesPage}
             />
             <ProtectedRoute
               exact
