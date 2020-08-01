@@ -1,28 +1,14 @@
 //this captures each item from the array that is mapped over and returns each separate array element as an item rendered on the DOM
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+//import { SwiperSlide } from 'swiper/react';
 
-// import PropTypes from 'prop-types';
-// import { withStyles } from 'material-ui/styles';
-// import Card, { CardActions, CardContent } from 'material-ui/Card';
-// import Button from 'material-ui/Button';
-// import Typography from 'material-ui/Typography';
+const ReadPageList = (props) => (
 
-const mapStateToProps = state => ({
-  state
-});
-
-class ReadPageList extends Component {
-
-  render() {
-
-    return (
-      <div id="readStory">
-          <div>{this.props.story.story} and {this.props.story.zipcode}</div>
-      </div>
-    );
-  }
-}
-
+  <div key={props.story.id}>
+    <p>{props.story.id}</p>
+    <p>{props.story.story}</p>
+  </div>
+);
+    
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(ReadPageList);
+export default ReadPageList;
