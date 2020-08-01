@@ -1,4 +1,4 @@
-// The ReadPage is the Public Reading View/Landing page. No auth is required. The data GET for the site is run when this componentDidMount, via getSaga.js and getResponsReducer.The data is in an array at this.props.state.getResponseReducer. This same data is mapped over for the DOM display for authenticated users in ReadPageWriter.js.
+// The ReadPage is the Public Reading View.
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -7,8 +7,6 @@ import { Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/swiper-bundle.css';
 import './ReadPage.css';
-
-//import ReadPageList from './ReadPageList';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -25,11 +23,15 @@ class ReadPage extends Component {
   }
 
   render() {
-  //  let readPageList = this.props.state.getResponse.reverse().map((story) => {
-  //    return (<ReadPageList key={story.id} story={story} />)
-  //  })
   
     return (
+
+      <div>
+        <div id="welcome">
+              <h3>
+                The public reading page
+              </h3>
+        </div>
   
       <Swiper
         spaceBetween={10}
@@ -43,8 +45,8 @@ class ReadPage extends Component {
       >
       {this.props.state.getResponse.reverse().map((story) => {
       return (
-      <SwiperSlide>
-       <div className="readPageSlideDiv" key={story.id}>
+      <SwiperSlide key={story.id}>
+       <div className="readPageSlideDiv" >
         <p>{story.id}</p>
         <p>{story.story}</p>
        </div>
@@ -53,6 +55,8 @@ class ReadPage extends Component {
       })}
 
       </Swiper>
+
+    </div>
       
     );
   }
