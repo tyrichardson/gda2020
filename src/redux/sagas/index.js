@@ -3,7 +3,7 @@ import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import addFavoriteSaga from './addFavoriteSaga';
-import deleteArchiveFavoriteSaga from './deleteArchiveFavoriteSaga';
+import deleteFavoriteSaga from './deleteFavoriteSaga';
 import deleteArchiveStorySaga from './deleteArchiveStorySaga';
 import getFavoriteSaga from './getFavoritesSaga';
 import getSaga from './getSaga';
@@ -24,7 +24,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     addFavoriteSaga(),
-    deleteArchiveFavoriteSaga(),
+    deleteFavoriteSaga(),
     deleteArchiveStorySaga(),
     getFavoriteSaga(),
     getSaga(),

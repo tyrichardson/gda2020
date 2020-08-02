@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import FavoritesPageList from './FavoritesPageList';
+import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide} from 'swiper/react';
+
+import 'swiper/swiper-bundle.css';
+import '../ReadPage/ReadPage.css';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
 const mapStateToProps = state => ({
-  user: state.user,
   state
 });
 
@@ -19,41 +24,49 @@ class FavoritesPage extends Component {
     })
   }
 
-  render() {
-
-    const favoritesPageList = this.props.state.getFavorites.map((story) => {
-      return (<FavoritesPageList key={story.id} story={story}/>)
+  handleClickUpdate = (story) => {
+    console.log('clicked remove favorite button', story);
+    this.props.dispatch({
+      type: 'DELETE_FAVORITE',
+      payload: story
     })
+  }
 
-    let content = null;
-
-    if (this.props.state.user.username) {
-      content = (
-        <div>
-
-          <div id="welcome">
-            <h3>
-            {this.props.state.user.username }'s favorite's page
-            </h3>
-          </div>
-
-          <section id="favorites">
-            <h4>Your Favorites</h4>
-            { favoritesPageList }
-          </section>
-        </div>
-      );
-    } 
+  render() {
 
     return (
       <div>
-        { content }
-      </div>
+        <div id="welcome">
+          <h3>
+            {this.props.state.user.username }'s favorites page
+          </h3>
+        </div>
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          loop
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log('slide change')}
+        >
+        {this.props.state.getFavorites.reverse().map((story) => {
+        return (
+          <SwiperSlide key={story.id}>
+            <div className="readPageSlideDiv" >
+              <p>{story.id}</p>
+              <p>{story.story}</p>
+              <button onClick={() => this.handleClickUpdate(story)}>Remove Favorite</button>
+            </div>
+          </SwiperSlide>
+          )
+          })}
+        </Swiper>
+        </div>
     );
   }
 }
-
-
 
 // this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(FavoritesPage);

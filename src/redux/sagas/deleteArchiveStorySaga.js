@@ -8,8 +8,12 @@ function* deleteArchiveStoryCall(action) {
     withCredentials: true,
   }
   try {
+    yield call(axios.delete, `api/writer/allFavorites/${action.payload}`, config)
+    console.log("delete all favorites of this story to be deleted ,", action.payload);
+    
     yield call(axios.delete, `api/writer/${action.payload}`, config)
     console.log("delete saga axios call:", action.payload);
+  
     yield put({
       type: 'GET_WRITER_STORIES_SAGA'
     })

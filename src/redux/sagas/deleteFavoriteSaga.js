@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* deleteArchiveFavoriteCall(action) {
-  console.log('deleteArchiveFavoriteCall running in deleteArchiveFavoriteSaga');
+function* deleteFavoriteCall(action) {
+  console.log('deleteFavoriteCall running in deleteFavoriteSaga');
   const config = {
     headers: {'Content-Type': 'application/json'},
     withCredentials: true,
@@ -15,12 +15,12 @@ function* deleteArchiveFavoriteCall(action) {
     })
   }
     catch(error){
-      console.log('an error occurred in deleteArchiveFavoriteCall saga:', error);
+      console.log('an error occurred in deleteFavoriteCall saga:', error);
     }
 }
 
-function* deleteArchiveFavoriteSaga() {
-  yield takeEvery('DELETE_ARCHIVE_FAVORITE', deleteArchiveFavoriteCall)
+function* deleteFavoriteSaga() {
+  yield takeEvery('DELETE_FAVORITE', deleteFavoriteCall)
 }
 
-export default deleteArchiveFavoriteSaga;
+export default deleteFavoriteSaga;
