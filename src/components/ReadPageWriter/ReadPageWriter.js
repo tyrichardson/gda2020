@@ -23,7 +23,7 @@ class ReadPageWriter extends Component {
 
 handleClickFavorite = (story) => {
  // event.preventDefault();
-  swal("To see your Favorites, click Archive");
+  swal("This story has been added to your Favorites.");
   console.log('clicked favorite button', story);
   this.props.dispatch({
     type: 'ADD_FAVORITE',
@@ -57,7 +57,7 @@ handleClickFavorite = (story) => {
             <div className="readPageSlideDiv" >
               <p>{story.id}</p>
               <p>{story.story}</p>
-              <button onClick={() => this.handleClickFavorite(story)}>Favorite</button>
+              <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
             </div>
           </SwiperSlide>
           )

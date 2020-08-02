@@ -1,4 +1,3 @@
-//This allows logged-in user to write and post a new story to the database (good_deeds on PostgreSQL). Their new story subsequently appears as the first story on the ReadPageWriter.js view.
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
@@ -26,7 +25,7 @@ class WritePage extends Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    swal("Click Read to see your story. Click Archive to edit your story.");
+    swal("Published stories appear in Read and Public. Click Archive to edit your stories.");
     ReactDOM.findDOMNode(this.refs.textarea).focus();
     console.log('click publish button:', this.state.newStory, this.state.zipcode);
     this.props.dispatch({

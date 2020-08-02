@@ -80,7 +80,7 @@ router.post('/', (req, res) => {
 router.post('/fav', (req, res) => {
   console.log('authenticated user POST server route for adding favorites from WriterPage, req.body:', req.body);
   if(req.isAuthenticated()) {
-    const queryText = 'INSERT INTO "favorite" (story_id, writer_id) VALUES ($1, $2);';
+    const queryText = 'INSERT INTO "favorite" (story_id, writer_id) VALUES ($1, $2) IF EXISTS DO NOTHING;';
     pool.query(queryText, [req.body.id, req.user.id])
     .then((result) => {
       res.sendStatus(201);
@@ -114,7 +114,7 @@ router.delete('/:id', (req, res) => {
 });
 
 /**
-DELETE for authenticated users to delete a favorite from their Archive page
+DELETE for authenticated users to delete a favorite
 **/
 router.delete('/favorite/:id', (req, res) => {
   // console.log('authenticated user DELETE favorite server route for Archive Page, req.params is:', req.params);
