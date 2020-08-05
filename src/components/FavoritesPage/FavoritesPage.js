@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
+import GoogleMapDB from '../GoogleMap/GoogleMapDB';
+
 import 'swiper/swiper-bundle.css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
@@ -56,6 +58,7 @@ class FavoritesPage extends Component {
             <div className="swiperDiv" >
               <p>{story.id}</p>
               <p>{story.story}</p>
+              <GoogleMapDB storyID={story.story_id} />
               <button onClick={() => this.handleClickUpdate(story)}>Remove Favorite</button>
             </div>
           </SwiperSlide>

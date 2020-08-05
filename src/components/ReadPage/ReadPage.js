@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
+import GoogleMapDB from '../GoogleMap/GoogleMapDB';
+
 import 'swiper/swiper-bundle.css';
 import '../App/App.css';
 
@@ -49,15 +51,13 @@ class ReadPage extends Component {
        <div className="swiperDiv" >
         <p>{story.id}</p>
         <p>{story.story}</p>
+        <GoogleMapDB storyID={story.id} />
        </div>
       </SwiperSlide>
       )
       })}
-
       </Swiper>
-
     </div>
-      
     );
   }
 }

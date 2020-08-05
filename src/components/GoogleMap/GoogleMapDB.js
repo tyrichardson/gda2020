@@ -41,8 +41,6 @@ class GoogleMapDB extends Component {
 
   render() {
 
-   
-
     return (
       
       <img src={this.state.staticMap} alt="map" />

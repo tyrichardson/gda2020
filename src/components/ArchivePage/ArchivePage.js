@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
+import GoogleMapDB from '../GoogleMap/GoogleMapDB';
+
 import 'swiper/swiper-bundle.css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
@@ -71,6 +73,7 @@ class ArchivePage extends Component {
           {this.props.state.user.username }'s archive page in editing mode
         </h3>
       </div>
+      <div>
         <Swiper
           spaceBetween={10}
           slidesPerView={1}
@@ -93,6 +96,7 @@ class ArchivePage extends Component {
           )
           })}
         </Swiper>
+        </div>
       </div>
     )
   } else {
@@ -119,6 +123,7 @@ class ArchivePage extends Component {
             <div className="swiperDiv" >
               <p>{story.id}</p>
               <p>{story.story}</p>
+              <GoogleMapDB storyID={story.id} />
               <button onClick={() => this.handleDelete(story)}>Delete</button>
               <button onClick={() => this.handleEdit()}>Edit</button>
             </div>

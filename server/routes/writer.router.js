@@ -81,7 +81,7 @@ router.post('/fav', (req, res) => {
   console.log('authenticated user POST server route for adding favorites from WriterPage, req.body:', req.body);
   if(req.isAuthenticated()) {
     const queryText = 'INSERT INTO "favorite" (story_id, writer_id) VALUES ($1, $2) IF EXISTS DO NOTHING;';
-    pool.query(queryText, [req.body.id, req.user.id])
+    pool.query(queryText, [req.body.id, req.body.writer_id])
     .then((result) => {
       res.sendStatus(201);
     }).catch((error) => {

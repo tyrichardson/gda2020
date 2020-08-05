@@ -35,12 +35,11 @@ class ReadPageWriter extends Component {
   render() {    
 
     return (
-
       <div>
         <div id="welcome">
-              <h3>
-                {this.props.state.user.username }'s reading page
-              </h3>
+          <h3>
+            {this.props.state.user.username }'s reading page
+          </h3>
         </div>
         <Swiper
           spaceBetween={10}
@@ -54,19 +53,16 @@ class ReadPageWriter extends Component {
         >
         {this.props.state.getResponse.reverse().map((story) => {
         return (
-          <div>
-          
-            <SwiperSlide key={story.id}>
-              <div className="swiperDiv" >
-                <p>{story.id}</p>
-                <p>{story.story}</p>
-                <GoogleMapDB storyID={story.id} />
-              </div>
-            </SwiperSlide>  
-            <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
-          </div>
-        
-        )})}
+          <SwiperSlide key={story.id}>
+            <div className="swiperDiv" >
+              <p>{story.id}</p>
+              <p>{story.story}</p>
+              <GoogleMapDB storyID={story.id} />
+              <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
+            </div>
+          </SwiperSlide>
+        )
+        })}
         </Swiper>
       </div>
     );
