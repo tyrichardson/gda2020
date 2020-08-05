@@ -34,8 +34,11 @@
 }
 
 .nav-link:hover {
-  text-decoration: underline;
-  text-decoration-color: slategray;
+  color: aliceblue;
+}
+
+.nav-link:focus {
+  color: aliceblue;
 }
 
 .nav-right {

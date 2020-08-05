@@ -6,7 +6,7 @@ import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/swiper-bundle.css';
-import './ReadPage.css';
+import '../App/App.css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -46,7 +46,7 @@ class ReadPage extends Component {
       {this.props.state.getResponse.reverse().map((story) => {
       return (
       <SwiperSlide key={story.id}>
-       <div className="readPageSlideDiv" >
+       <div className="swiperDiv" >
         <p>{story.id}</p>
         <p>{story.story}</p>
        </div>

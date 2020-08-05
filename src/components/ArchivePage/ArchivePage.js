@@ -5,7 +5,6 @@ import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/swiper-bundle.css';
-import '../ReadPage/ReadPage.css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -85,7 +84,7 @@ class ArchivePage extends Component {
         {this.props.state.getWriterStories.reverse().map((story) => {
         return (
           <SwiperSlide key={story.id}>
-            <div className="readPageSlideDiv" >
+            <div className="swiperDiv" >
               <textarea ref="newText" defaultValue={story.story}></textarea>
               <button onClick={() => this.handleSave(story)}>Save</button>
               <button onClick={() => this.handleEdit()}>Cancel</button>
@@ -117,7 +116,7 @@ class ArchivePage extends Component {
         {this.props.state.getWriterStories.reverse().map((story) => {
         return (
           <SwiperSlide key={story.id}>
-            <div className="readPageSlideDiv" >
+            <div className="swiperDiv" >
               <p>{story.id}</p>
               <p>{story.story}</p>
               <button onClick={() => this.handleDelete(story)}>Delete</button>

@@ -1,32 +1,50 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 
+import axios from 'axios';
+
 const mapStateToProps = (state) => ({ state });
+
+const config = {
+  headers: {'Content-Type': 'application/json'},
+  withCredentials: true,
+}
+
+var url;
 
 class GoogleMap extends Component {
 
-  googleMapRef = createRef();
-
-  componentDidMount() {
-    const googleMapScript = document.createElement("script");
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAwSQzeRvW2Tyl6G-p6yWedTWs372rd_F0`;
-    window.document.body.appendChild(googleMapScript);
-    googleMapScript.addEventListener("load", () => {
-      this.googleMap = this.createGoogleMap();
-     // this.marker = this.createMarker();
+  getURL = () => {
+    axios.get('/api/googleMaps', config)
+    .then((response) => {
+      url = response.data;
+      const googleMapScript = document.createElement("script");
+      googleMapScript.src = url;
+      window.document.body.appendChild(googleMapScript);
+      googleMapScript.addEventListener("load", () => {
+        this.googleMap = this.createGoogleMap();
+      // this.marker = this.createMarker();
     });
+    })
+    .catch((error) => {
+      console.log('error in get googleMaps ', error);
+    })
   }
 
-    city = {
-      center: { lat: 37.0902, lng: -95.7129 }
-    }
+  googleMapRef = createRef();
+ 
+  componentDidMount() {
+      this.getURL();
+  }
 
+  center = { lat: 37.0902, lng: -95.7129 }
+    
   createGoogleMap = () =>
     new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 4,
       center: {
-        lat: this.city.center.lat,
-        lng: this.city.center.lng,
+        lat: this.center.lat,
+        lng: this.center.lng,
       },
       mapTypeId: "terrain",
       zoomControl: true,

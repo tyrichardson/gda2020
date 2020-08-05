@@ -4,8 +4,9 @@ import swal from 'sweetalert';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
+import GoogleMapDB from '../GoogleMap/GoogleMapDB';
+
 import 'swiper/swiper-bundle.css';
-import '../ReadPage/ReadPage.css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -18,18 +19,18 @@ class ReadPageWriter extends Component {
   componentDidMount() {
     this.props.dispatch({
       type:'GET_STORIES'
-  });
-}
+    });
+  }
 
-handleClickFavorite = (story) => {
- // event.preventDefault();
-  swal("This story has been added to your Favorites.");
-  console.log('clicked favorite button', story);
-  this.props.dispatch({
-    type: 'ADD_FAVORITE',
-    payload: story
-  })
-}
+  handleClickFavorite = (story) => {
+  // event.preventDefault();
+    swal("This story has been added to your Favorites.");
+    console.log('clicked favorite button', story);
+    this.props.dispatch({
+      type: 'ADD_FAVORITE',
+      payload: story
+    })
+  }
 
   render() {    
 
@@ -53,15 +54,19 @@ handleClickFavorite = (story) => {
         >
         {this.props.state.getResponse.reverse().map((story) => {
         return (
-          <SwiperSlide key={story.id}>
-            <div className="readPageSlideDiv" >
-              <p>{story.id}</p>
-              <p>{story.story}</p>
-              <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
-            </div>
-          </SwiperSlide>
-          )
-          })}
+          <div>
+          
+            <SwiperSlide key={story.id}>
+              <div className="swiperDiv" >
+                <p>{story.id}</p>
+                <p>{story.story}</p>
+                <GoogleMapDB storyID={story.id} />
+              </div>
+            </SwiperSlide>  
+            <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
+          </div>
+        
+        )})}
         </Swiper>
       </div>
     );

@@ -5,7 +5,6 @@ import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/swiper-bundle.css';
-import '../ReadPage/ReadPage.css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -54,7 +53,7 @@ class FavoritesPage extends Component {
         {this.props.state.getFavorites.reverse().map((story) => {
         return (
           <SwiperSlide key={story.id}>
-            <div className="readPageSlideDiv" >
+            <div className="swiperDiv" >
               <p>{story.id}</p>
               <p>{story.story}</p>
               <button onClick={() => this.handleClickUpdate(story)}>Remove Favorite</button>
