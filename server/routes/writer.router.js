@@ -27,7 +27,7 @@ router.get('/favorites', (req, res) => {
   // console.log('authenticated user GET server route for favorites in Archive view:', req.isAuthenticated());
   //console.log('writerGET req.user is:', req.user);
   if(req.isAuthenticated()){
-  let queryText = 'SELECT "story", "zipcode", "favorite"."id", "favorite"."story_id", "favorite"."writer_id" FROM "story" JOIN "favorite" ON "story"."id" = "favorite"."story_id" JOIN "writer" ON "writer"."id" = "favorite"."writer_id" WHERE "favorite"."writer_id" = $1 ORDER BY "story"."id" DESC;';
+  let queryText = 'SELECT "story", "zipcode", "favorite"."id", "favorite"."story_id", "favorite"."writer_id" FROM "story" JOIN "favorite" ON "story"."id" = "favorite"."story_id" JOIN "writer" ON "writer"."id" = "favorite"."writer_id" WHERE "favorite"."user_id" = $1 ORDER BY "story"."id" DESC;';
   pool.query(queryText, [req.user.id])
   .then((result)=> {
     res.send(result.rows);
@@ -80,8 +80,8 @@ router.post('/', (req, res) => {
 router.post('/fav', (req, res) => {
   console.log('authenticated user POST server route for adding favorites from WriterPage, req.body:', req.body);
   if(req.isAuthenticated()) {
-    const queryText = 'INSERT INTO "favorite" (story_id, writer_id) SELECT $1, $2 WHERE NOT EXISTS ( SELECT (story_id, writer_id) FROM "favorite" WHERE (story_id = $1 AND writer_id = $2));';
-    pool.query(queryText, [req.body.id, req.body.writer_id])
+    const queryText = 'INSERT INTO "favorite" (story_id, writer_id, user_id) SELECT $1, $2, $3 WHERE NOT EXISTS ( SELECT (story_id, writer_id, user_id) FROM "favorite" WHERE (story_id = $1 AND writer_id = $2 and user_id = $3));';
+    pool.query(queryText, [req.body.id, req.body.writer_id, req.user.id])
     .then((result) => {
       res.sendStatus(201);
     }).catch((error) => {

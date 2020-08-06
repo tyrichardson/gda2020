@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/latLong', (req, res) => {
-    if(req.isAuthenticated()){
+  //  if(req.isAuthenticated()){
         console.log('latLong route ', req.query.name);
         let queryText = 'SELECT "lat", "long" FROM "story" WHERE "id" = $1;';
         pool.query(queryText, [req.query.name])
@@ -29,7 +29,7 @@ router.get('/latLong', (req, res) => {
         .catch((error) => {
            res.sendStatus(500);
         }); 
-    }
+  //  }
 });
 
 module.exports = router;
