@@ -56,7 +56,9 @@ class FavoritesPage extends Component {
         return (
           <SwiperSlide key={story.id}>
             <div className="swiperDiv" >
-              <p>{story.id}</p>
+              <p>fav id: {story.id}</p>
+              <p>story id: {story.story_id}</p>
+              <p>user id: {this.props.state.user.id}</p>
               <p>{story.story}</p>
               <GoogleMapDB storyID={story.story_id} />
               <button onClick={() => this.handleClickUpdate(story)}>Remove Favorite</button>

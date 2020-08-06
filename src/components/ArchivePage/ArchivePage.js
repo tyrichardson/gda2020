@@ -18,8 +18,10 @@ class ArchivePage extends Component {
 
   state = {
     editing: false,
-    text: this.props.state.getResponse.story,
+    text: '',
     newText: '',
+    id: '',
+    writer_id: '',
   };
   
   componentDidMount() {
@@ -36,14 +38,27 @@ class ArchivePage extends Component {
     })
   }
 
-  handleEdit = () => {
-    console.log('clicked edit button');
+  handleEdit = (story) => {
+    console.log('clicked edit button ', story.story );
     this.setState({
-      editing: !this.state.editing
+      editing: !this.state.editing,
+      text: story.story,
+      id: story.id,
+      writer_id: story.writer_id,
+    })
+    console.log('edit state.text ', this.state.text);
+  }
+
+  handleCancel = () => {
+    this.setState({
+      editing: !this.state.editing,
+      text: '',
+      id: '',
+      writer_id: '',
     })
   }
 
-  handleSave = (story) => {
+  handleSave = () => {
     let val = this.refs.newText.value;
     this.setState({
       newText: val,
@@ -51,7 +66,7 @@ class ArchivePage extends Component {
     },() => {
       console.log('newText val, this.state, from Edit button:', this.state);
       let newEdit = {
-        story: this.state.newText, id: story.id, writer_id: story.writer_id
+        story: this.state.newText, id: this.state.id, writer_id: this.state.writer_id
       };
       console.log('newEdit for PUT payload:', newEdit);
       this.props.dispatch({
@@ -64,76 +79,57 @@ class ArchivePage extends Component {
   // Upon dispatch, payload: {preEditStory: this.props.story, edit: this.state.text }
 
   render() {
-
-  if (this.state.editing) {
-    return (
-      <div>
-      <div id="welcome">
-        <h3>
-          {this.props.state.user.username }'s archive page in editing mode
-        </h3>
-      </div>
-      <div>
-        <Swiper
-          spaceBetween={10}
-          slidesPerView={1}
-          navigation
-          loop
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
-        >
-        {this.props.state.getWriterStories.reverse().map((story) => {
-        return (
-          <SwiperSlide key={story.id}>
-            <div className="swiperDiv" >
-              <textarea ref="newText" defaultValue={story.story}></textarea>
-              <button onClick={() => this.handleSave(story)}>Save</button>
-              <button onClick={() => this.handleEdit()}>Cancel</button>
-            </div>
-          </SwiperSlide>
-          )
-          })}
-        </Swiper>
-        </div>
-      </div>
-    )
-  } else {
+    if (this.state.editing) {
       return (
         <div>
-        <div id="welcome">
-          <h3>
-            {this.props.state.user.username }'s archive page
-          </h3>
+          <div id="welcome">
+            <h3>
+              {this.props.state.user.username }'s archive page in editing mode
+            </h3>
+          </div>
+        
+          <div className="editTextArea" >
+            <textarea ref="newText" defaultValue={this.state.text}></textarea>
+            <button onClick={() => this.handleSave()}>Save</button>
+            <button onClick={() => this.handleCancel()}>Cancel</button>
+          </div>
         </div>
-        <Swiper
-          spaceBetween={10}
-          slidesPerView={1}
-          navigation
-          loop
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
-        >
-        {this.props.state.getWriterStories.reverse().map((story) => {
+      )
+    } else {
         return (
-          <SwiperSlide key={story.id}>
-            <div className="swiperDiv" >
-              <p>{story.id}</p>
-              <p>{story.story}</p>
-              <GoogleMapDB storyID={story.id} />
-              <button onClick={() => this.handleDelete(story)}>Delete</button>
-              <button onClick={() => this.handleEdit()}>Edit</button>
+          <div>
+            <div id="welcome">
+              <h3>
+                {this.props.state.user.username }'s archive page
+              </h3>
             </div>
-          </SwiperSlide>
-          )
-          })}
-        </Swiper>
-        </div>
-      );
-    }
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              navigation
+              loop
+              pagination={{ clickable: true }}
+              scrollbar={{ draggable: true }}
+              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => console.log('slide change')}
+            >
+            {this.props.state.getWriterStories.reverse().map((story) => {
+            return (
+              <SwiperSlide key={story.id}>
+                <div className="swiperDiv" >
+                  <p>{story.id}</p>
+                  <p>{story.story}</p>
+                  <GoogleMapDB storyID={story.id} />
+                  <button onClick={() => this.handleDelete(story)}>Delete</button>
+                  <button onClick={() => this.handleEdit(story)}>Edit</button>
+                </div>
+              </SwiperSlide>
+              )
+              })}
+            </Swiper>
+          </div>
+        );
+      }
   }
 }
 
