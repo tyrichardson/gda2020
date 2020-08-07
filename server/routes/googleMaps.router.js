@@ -7,9 +7,19 @@ const googleMapsKey = 'AIzaSyAwSQzeRvW2Tyl6G-p6yWedTWs372rd_F0';
 const url = `https://maps.googleapis.com/maps/api/js?key=${googleMapsKey}`;
 
 router.get('/', (req, res) => {
-    if(req.isAuthenticated()){
+   if(req.isAuthenticated()){
         console.log('googleMaps get url ', url);
-        res.send(url);
+        let queryText = 'SELECT "lat", "long" FROM "story";';
+        pool.query(queryText)
+        .then((result) => {
+            getMap = {
+                result: result.rows,
+                url: url,
+            }
+            res.send(getMap);
+        }).catch((error) => {
+            res.sendStatus(500);
+        });
     }
 });
 

@@ -10,15 +10,17 @@ const config = {
   withCredentials: true,
 }
 
-var url;
+var url = '';
+var locations = [];
 
 class GoogleMap extends Component {
-
 
   getURL = () => {
     axios.get('/api/googleMaps', config)
     .then((response) => {
-      url = response.data;
+      url = response.data.url;
+      locations = response.data.result;
+      console.log('get googleMap response.data ', url, locations);
       const googleMapScript = document.createElement("script");
       googleMapScript.src = url;
       window.document.body.appendChild(googleMapScript);
@@ -69,7 +71,6 @@ class GoogleMap extends Component {
         center: this.center,
         radius: 20000
     });
-    console.log(this.url, this.value);
   }
   */
 
