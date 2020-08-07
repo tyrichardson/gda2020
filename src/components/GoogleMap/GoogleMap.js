@@ -14,6 +14,7 @@ var url;
 
 class GoogleMap extends Component {
 
+
   getURL = () => {
     axios.get('/api/googleMaps', config)
     .then((response) => {
@@ -23,7 +24,7 @@ class GoogleMap extends Component {
       window.document.body.appendChild(googleMapScript);
       googleMapScript.addEventListener("load", () => {
         this.googleMap = this.createGoogleMap();
-      // this.marker = this.createMarker();
+      //  this.marker = this.createMarker();
     });
     })
     .catch((error) => {
@@ -55,7 +56,7 @@ class GoogleMap extends Component {
       fullscreenControl: true,
     });
 
-/*
+    /*
   createMarker = () =>
     {
        new window.google.maps.Circle({
@@ -65,7 +66,7 @@ class GoogleMap extends Component {
         fillColor: "red",
         fillOpacity: 0.35,
         map: this.googleMap,
-        center: this.city.center,
+        center: this.center,
         radius: 20000
     });
     console.log(this.url, this.value);

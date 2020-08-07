@@ -49,7 +49,6 @@ class ReadPage extends Component {
       return (
       <SwiperSlide key={story.id}>
        <div className="swiperDiv" >
-        <p>{story.id}</p>
         <p>{story.story}</p>
         <GoogleMapDB storyID={story.id} />
        </div>
