@@ -12,6 +12,7 @@ const config = {
 
 var url = '';
 var locations = [];
+var markerArray = [];
 
 class GoogleMap extends Component {
 
@@ -20,13 +21,14 @@ class GoogleMap extends Component {
     .then((response) => {
       url = response.data.url;
       locations = response.data.result;
-      console.log('get googleMap response.data ', url, locations);
+      console.log('get googleMap response.data ', url, locations, typeof locations[0].lat);
       const googleMapScript = document.createElement("script");
       googleMapScript.src = url;
       window.document.body.appendChild(googleMapScript);
       googleMapScript.addEventListener("load", () => {
         this.googleMap = this.createGoogleMap();
-      //  this.marker = this.createMarker();
+        this.createMarker(this.googleMap);
+        this.markerCluster = this.createMarkerCluster(this.googleMap);
     });
     })
     .catch((error) => {
@@ -57,23 +59,25 @@ class GoogleMap extends Component {
       rotateControl: false,
       fullscreenControl: true,
     });
-
-    /*
-  createMarker = () =>
+  
+  createMarker = (map) =>
     {
-       new window.google.maps.Circle({
-        strokeColor: "blue",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "red",
-        fillOpacity: 0.35,
-        map: this.googleMap,
-        center: this.center,
-        radius: 20000
-    });
-  }
-  */
+      markerArray = locations.map(location => {
+      return new window.google.maps.Marker({
+        map: map,
+        position: location, location
+        });
+      })
+    }
 
+  createMarkerCluster = (map) =>
+  {
+    if (window.google.maps.MarkerClusterer) {
+    console.log('markerArray ', markerArray);
+    return new window.google.maps.MarkerClusterer(map, markerArray, {imagePath: map});
+    }
+  }
+  
   render() {
 
     return (
