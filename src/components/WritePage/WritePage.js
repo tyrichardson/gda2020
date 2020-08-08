@@ -58,7 +58,7 @@ class WritePage extends Component {
               value={this.state.zipcode}
               onChange={this.handleChangeFor('zipcode')}
               autoFocus
-              placeholder="The story's zipcode?"
+              placeholder="The story's ZIP code?"
             ></input>
           </div>
 
