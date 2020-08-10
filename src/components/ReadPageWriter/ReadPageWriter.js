@@ -33,15 +33,40 @@ class ReadPageWriter extends Component {
     })
   }
 
-  render() {    
+  render() {
+    let content = null;
 
-    return (
-      <div>
-        <div id="welcome">
-          <h3>
-            {this.props.state.user.username }'s reading page
-          </h3>
-        </div>
+    if (this.props.state.user.admin) {
+      content = (
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          loop
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log('slide change')}
+        >
+        {this.props.state.getResponse.reverse().map((story) => {
+        return (
+          <SwiperSlide key={story.id}>
+            <div className="swiperDiv" >
+              <p>{story.story}</p>
+              <GoogleMapDB storyID={story.id} />
+              <br />
+              <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
+              <br />
+              <Sharing />
+              This is the admin page, not the regular user's page.
+            </div>
+          </SwiperSlide>
+        )
+        })}
+        </Swiper>
+      )
+    } else {
+      content = (
         <Swiper
           spaceBetween={10}
           slidesPerView={1}
@@ -67,6 +92,17 @@ class ReadPageWriter extends Component {
         )
         })}
         </Swiper>
+      )
+    }
+
+    return (
+      <div>
+        <div id="welcome">
+          <h3>
+            {this.props.state.user.username }'s reading page
+          </h3>
+        </div>
+        { content }
       </div>
     );
   }

@@ -76,7 +76,6 @@ class WritePage extends Component {
           <div id="publishDiv">
             <button id="publishButton" type="button" onClick={this.handleClick}>Publish your story</button>
           </div>
-
         </div>
       );
     }
