@@ -5,6 +5,7 @@ import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
 import GoogleMapDB from '../GoogleMap/GoogleMapDB';
+import Sharing from '../Sharing/Sharing';
 
 import 'swiper/swiper-bundle.css';
 
@@ -59,6 +60,8 @@ class ReadPageWriter extends Component {
               <GoogleMapDB storyID={story.id} />
               <br />
               <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
+              <br />
+              <Sharing />
             </div>
           </SwiperSlide>
         )

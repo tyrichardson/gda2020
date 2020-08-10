@@ -75,9 +75,13 @@ input {
 }
 
 .swiperDiv {
-  width: 80%;
+  width: 70%;
   text-align: center;
   margin: 1rem auto;
   padding: 1rem;
   border: 2px solid lightskyblue;
+}
+
+.sharing {
+  
 }

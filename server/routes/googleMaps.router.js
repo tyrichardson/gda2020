@@ -33,7 +33,7 @@ router.get('/latLong', (req, res) => {
             let lat = parseFloat(result.rows[0].lat);
             let long = parseFloat(result.rows[0].lng);
             console.log('staticMap result.rows ', lat, long);
-            let urlStatic = `http://maps.googleapis.com/maps/api/staticmap?&size=300x200&zoom=10&style=visibility:on&style=feature:water|element:geometry|visibility:on&style=feature:landscape|element:geometry|visibility:on&markers=anchor:center|icon:${staticMapIcon}|${lat},${long}&key=${googleMapsKey}`;
+            let urlStatic = `http://maps.googleapis.com/maps/api/staticmap?&size=500x250&zoom=10&style=visibility:on&style=feature:water|element:geometry|visibility:on&style=feature:landscape|element:geometry|visibility:on&markers=anchor:center|icon:${staticMapIcon}|${lat},${long}&key=${googleMapsKey}`;
             console.log('googleMapsRouter latLong result', urlStatic);
             res.send(urlStatic);
         })
