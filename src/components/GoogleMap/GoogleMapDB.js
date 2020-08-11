@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import axios from 'axios';
 
+import './GoogleMap.css';
+
 const mapStateToProps = (state) => ({ state });
 
 const config = {
@@ -39,7 +41,7 @@ class GoogleMapDB extends Component {
 
     return (
       
-      <img src={this.state.staticMap} alt="map" />
+      <img src={this.state.staticMap} alt="map" id="static-google-map" />
       
     );
 

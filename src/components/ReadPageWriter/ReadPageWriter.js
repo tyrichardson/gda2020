@@ -88,7 +88,6 @@ class ReadPageWriter extends Component {
               <button onClick={() => this.handleDelete(story)}>Delete</button>
               <br />
               <Sharing />
-              This is the admin page, not the regular user's page.
             </div>
           </SwiperSlide>
         )
