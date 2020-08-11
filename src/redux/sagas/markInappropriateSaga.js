@@ -1,4 +1,4 @@
-import { call, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* markInappropriateCall(action) {
@@ -22,6 +22,11 @@ function* toggleInappropriateCall(action) {
   }
   try {
     yield call(axios.put, `/api/writer/inappropriate/${action.payload.id}`, action.payload, config) 
+
+    yield put({
+      type: 'GET_STORIES'
+    })
+
   } catch (error) {
     console.log('error coming from toggleInappropriate axios.put call',  error)
  }

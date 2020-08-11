@@ -8,3 +8,10 @@ footer {
 .footerP {
     font-size: 12px;
 }
+
+h4 {
+    color: gold;
+    text-shadow: 2px 2px lightslategray;
+    margin: .5rem 0 0 0;
+    padding: 0;
+  }

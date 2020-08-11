@@ -81,6 +81,7 @@ class ReadPageWriter extends Component {
         return (
           <SwiperSlide key={story.id}>
             <div className="swiperDiv" >
+              Boolean Value: {String (`${story.inappropriate}`) }
               <p>{story.story}</p>
               <GoogleMapDB storyID={story.id} />
               <br />
