@@ -22,7 +22,6 @@ class GoogleMap extends Component {
     .then((response) => {
       url = response.data.url;
       locations = response.data.result;
-      console.log('get googleMap response.data ', url, locations, typeof locations[0].lat);
       const googleMapScript = document.createElement("script");
       googleMapScript.src = url;
       window.document.body.appendChild(googleMapScript);
@@ -75,7 +74,6 @@ class GoogleMap extends Component {
   createMarkerCluster = (map) =>
   {
     if (window.google.maps.MarkerClusterer) {
-    console.log('markerArray ', markerArray);
     return new window.google.maps.MarkerClusterer(map, markerArray, {imagePath: map});
     }
   }

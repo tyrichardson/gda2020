@@ -17,6 +17,10 @@ function* deleteArchiveStoryCall(action) {
     yield put({
       type: 'GET_WRITER_STORIES_SAGA'
     })
+
+    yield put({
+      type: 'GET_STORIES'
+    })
   }
     catch(error){
       console.log('an error occurred in deleteArchiveStoryCall saga:', error);

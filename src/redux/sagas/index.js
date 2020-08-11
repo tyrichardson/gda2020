@@ -10,7 +10,7 @@ import getSaga from './getSaga';
 import getWriterStoriesSaga from './getWriterStoriesSaga';
 import postSaga from './postSaga';
 import putEditStorySaga from './putEditStorySaga';
-
+import markInappropriateSaga from './markInappropriateSaga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -31,5 +31,6 @@ export default function* rootSaga() {
     getWriterStoriesSaga(),
     postSaga(),
     putEditStorySaga(),
+    markInappropriateSaga(),
   ]);
 }

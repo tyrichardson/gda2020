@@ -61,7 +61,7 @@ router.get('/favorites', (req, res) => {
 router.post('/', (req, res) => {
   // console.log('authenticated user POST server route for WriterPage', req.body);
   if(req.isAuthenticated()) {
-    const queryText = 'INSERT INTO "story" (story, writer_id, zipcode, lat, long) VALUES ($1, $2, $3, $4, $5);';
+    const queryText = 'INSERT INTO "story" (story, writer_id, zipcode, lat, lng) VALUES ($1, $2, $3, $4, $5);';
     pool.query(queryText, [req.body.newStory, req.user.id, parseInt(req.body.zipcode), req.body.lat, req.body.long])
     .then((result) => {
       res.sendStatus(201);
@@ -161,6 +161,46 @@ router.put('/:id', (req, res) => {
   if(req.isAuthenticated()) {
     let queryText = 'UPDATE "story" SET story = $1 WHERE id = $2 AND writer_id = $3;';
     pool.query(queryText, [req.body.story, req.params.id, req.user.id])
+    .then((result) => {
+      console.log('UPDATE successful', result);
+        res.sendStatus(201);
+    }).catch((error) => {
+      console.log('error in PUT, server side', error);
+      res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+/**
+ UPDATE for authenticated users to mark a story inappropriate
+ **/
+router.put('/markInappropriate/:id', (req, res) => {
+  console.log('authenticated user UPDATE inappropriate server route ', req.body.id, req.body.writer_id);
+  if(req.isAuthenticated()) {
+    let queryText = 'UPDATE "story" SET inappropriate = true WHERE id = $1 AND writer_id = $2;';
+    pool.query(queryText, [req.params.id, req.body.writer_id])
+    .then((result) => {
+      console.log('UPDATE successful', result);
+        res.sendStatus(201);
+    }).catch((error) => {
+      console.log('error in PUT, server side', error);
+      res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+/**
+ UPDATE for admin to UN-MARK a story inappropriate
+ **/
+router.put('/inappropriate/:id', (req, res) => {
+  console.log('authenticated user UPDATE inappropriate server route ', req.body.id, req.body.writer_id);
+  if(req.isAuthenticated()) {
+    let queryText = 'UPDATE "story" SET inappropriate = NOT inappropriate WHERE id = $1 AND writer_id = $2;';
+    pool.query(queryText, [req.params.id, req.body.writer_id])
     .then((result) => {
       console.log('UPDATE successful', result);
         res.sendStatus(201);

@@ -10,15 +10,12 @@ const config = {
   withCredentials: true,
 }
 
-//var staticMap = '';
-
 class GoogleMapDB extends Component {
   state = {
     staticMap: ''
   }
 
   getURL = () => {
-    console.log("this.props.storyID ", this.props.storyID);
     axios.get('/api/googleMaps/latLong', {
       params: {
         name: `${this.props.storyID}`
@@ -28,7 +25,6 @@ class GoogleMapDB extends Component {
       this.setState({
         staticMap: response.data
       });
-      console.log('googleMapsDB response.data staticMap ', this.state.staticMap);
     })
     .catch((error) => {
       console.log('error in get googleMapDB ', error);
