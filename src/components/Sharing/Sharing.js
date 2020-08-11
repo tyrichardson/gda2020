@@ -28,7 +28,7 @@ const Sharing = () => (
         image: '',  // (defaults to og:image or twitter:image)
         description: 'Sharing from Good Deeds Anonymous',       // (defaults to og:description or twitter:description)
         title: '',            // (defaults to og:title or twitter:title)
-        message: 'This is from Good Deeds Anonymous',     // (only for email sharing)
+        message: '"So shines a good deed in a weary world."',     // (only for email sharing)
         subject: 'Sharing from Good Deeds Anonymous',  // (only for email sharing)
         //username: 'custom twitter handle' // (only for twitter sharing)
       }}

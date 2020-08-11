@@ -89,7 +89,7 @@ class ArchivePage extends Component {
           </div>
         
           <div className="editTextArea" >
-            <textarea ref="newText" defaultValue={this.state.text}></textarea>
+            <textarea ref="newText" defaultValue={this.state.text} id="textEdit"></textarea>
             <button onClick={() => this.handleSave()}>Save</button>
             <button onClick={() => this.handleCancel()}>Cancel</button>
           </div>

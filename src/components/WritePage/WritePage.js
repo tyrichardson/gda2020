@@ -69,7 +69,7 @@ class WritePage extends Component {
               onChange={this.handleChangeFor('newStory')} 
               row="4" 
               cols="12" 
-              placeholder="The story of your good deed?">
+              placeholder="The story of your good deed in a thousand words or less.">
             </textarea>
           </div>
 

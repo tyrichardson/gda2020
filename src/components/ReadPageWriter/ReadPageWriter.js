@@ -62,6 +62,7 @@ class ReadPageWriter extends Component {
       }
 
   render() {
+    
     let content = null;
 
     if (this.props.state.user.admin) {
