@@ -10,6 +10,14 @@ Good Deeds Anonymous (GDA) is a Single Page Application promoting the creation a
 
 Each Story is a piece of user-generated content from a Writer, a registered/logged-in user. All visitors to the site are Readers. Stories are sorted by each Writer’s State of Residence. In a subsequent update, an Admin role will be added for the purpose of removing Stories flagged as inappropriate by registered users.
 
+#Usernames/Passwords:
+You are encouraged to Register with a Username/Password combo of your own, but you are welcome to use some existing combos that were used during development:
+tympls/ty
+tymemphis/ty
+tykalispell/ty
+tyoakland/ty
+tydavis/ty
+
 #Views/Features:
 
 Public (not logged in):
