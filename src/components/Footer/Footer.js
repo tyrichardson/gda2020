@@ -10,8 +10,13 @@ const Footer = () => (
   <footer>
     <h4>"How far that little candle throws his beams! So shines a good deed in a weary world.”</h4>
     <h5>Attributions</h5>
+
     <p className="footerP">latitudes and longitudes provided via ZIP codes from: <br />
-    <a href="http://public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/api">public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/api</a></p>
+    <a href="http://public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/api" target="_blank" rel="noopener noreferrer">public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/api</a></p>
+
+    <p className="footerP">water ripple icon provided by: <br />
+    <a href="http://www.textures4photoshop.com" target="_blank" rel="noopener noreferrer">Textures4Photoshop</a></p>
+
   </footer>
 );
 
