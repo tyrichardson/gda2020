@@ -2,7 +2,7 @@
 
 #Application Purpose:
 
-A little emotional uplift! There are good people, living among us, doing good deeds for others simply because they can. And they are us! Not looking for credit, not looking for the limelight,  simply wanting share our stories. We can do that on Good Deeds Anonymous. By sharing our stories and reading those of others, we can create a quiet feedback loop that benefits ourselves, others, and the communities we share.
+A little emotional uplift! There are good people, living among us, doing good deeds for others simply because they can. And they are us! Not looking for credit, not looking for the limelight,  simply wanting share our stories. We can do that on Good Deeds Anonymous. By sharing our stories and reading those of others, we can create a quiet feedback loop that benefits ourselves, others, and the communities we share. "So shines a good deed in a weary world."
 
 #Application Overview:
 
@@ -12,39 +12,43 @@ Each Story is a piece of user-generated content from a Writer, a registered/logg
 
 #Views/Features:
 
-Read (not logged in):
-The Read view is the Landing page/Home page of Good Deeds Anonymous. The first story is a simple introduction to the site, its purpose, and its functionality. All visitors are Readers. Readers can go scroll through all the stories. All visitors are encouraged to become Writers via the Sign-in button in the navigation bar. 
+Public (not logged in):
+The public reading view is the Landing page/Home page of Good Deeds Anonymous. All visitors are Readers. Readers can go scroll through all the stories. All visitors are encouraged to become Writers via the Login / Register button in the navigation bar. Each story has a Google Maps Static Map with a custom marker (a "water ripple" icon) which is centered on the story's ZIP code, as entered by the story's Writer.
 
-#Sign-in:
-The Sign-in view allows a visitor to register as a Writer or, if already a Writer, they can login. The Read button remains active, so the user go back if they decide not to registration or login. If a registration or login is submitted and is successful, the Write view displays.
+#Login / Register:
+The Login / Register views allows a visitor to register as a Writer or, if already a Writer, they can login. The Public button remains active, so the user go back if they decide not to registration or login. If a registration or login is submitted and is successful, the Write view displays.
 
 #Write:
-The Write view allows a Writer to type and Share a Story. Upon clicking Publish, a prompt is displayed letting the user know their story will be displayed on the Read and Archive pages.
+The Write view allows a Writer to type up a Story and enter the zipcode where their good deed was done. Upon clicking Publish, a prompt is displayed letting the user know their story will be displayed on the Read and Archive pages. The Write view displays a Google Maps Javascript API map with custom cluster markers centered on the ZIP codes entered for each story by their Writers.
 
 #Read (logged in):
-The Read view is always accessible for a logged-in Writer. Unlike a Reader, a Writer can mark Stories as Favorites.
+The Read view is always accessible for a logged-in Writer. Unlike a Reader, a Writer can mark Stories as Favorites and share them via social media buttons (Facebook, Twitter, and Email). They can also mark stories as "Inappropriate." When logged-in as an administrator, stories marked "Inappropriate" can be removed or unmarked as such. Each story has a Google Maps Static Map with a custom marker (a "water ripple" icon) which is centered on the story's ZIP code, as entered by the story's Writer.
 
-#My Archive:
-The My Archive view displays two lists: a list of the Writer’s published stories, which allows them to Edit or Delete Stories, and a list of the Writer’s Favorites, which allows them to unfavorite an item, which removes it from their Favorites list.
+#Archive:
+The Archive view displays a list of the Writer’s published stories, which allows them to Edit or Delete Stories. Each story has a Google Maps Static Map with a custom marker (a "water ripple" icon) which is centered on the story's ZIP code, as entered by the story's Writer.
+
+#Favorites:
+The Favorites view displays list of the Writer’s Favorites, which allows them to unfavorite an item, which removes it from their Favorites list. Each story has a Google Maps Static Map with a custom marker (a "water ripple" icon) which is centered on the story's ZIP code, as entered by the story's Writer.
 
 #Routes:
 Registration/Login
 GET all for Read view sorted by most recent
+GET for Google Maps Javascript API
+GET for Google Maps Static API
+GET Writer's stories
+GET Writer's favorites
+GET specific story for editing
 POST for new Story from Write view
-UPDATE for adding Favorites
-UPDATE for removing Favorites
-GET my stories (logged in user)
-GET specific story by id
-UPDATE for displaying and editing a published Story in Write view
-DELETE for deleting a Story
+POST favorites
+DELETE for deleting a Writer's Story and all instances of it as a Favorite for other Writers
+DELETE favorite
+UPDATE an edited story
+UPDATE with "Inappropriate = true" by Writer
+UPDATE with toggle "Inappropriate" by Admin
+
 
 #For next iteration:
-
-~Writers will be able to flag Stories as inappropriate, alerting an Admin to decide whether or not to delete the offending Story. An Admin view will be added to the Archive page at that time.
-~Writers will be able to update their state of residence; story can be sorted by state.
-	~use location service to sort with distance of place story added from
-~Make mobile version
-~Add social sharing (Facebook, Instagram, Twitter...)
+	~ port to React-Native
 
 #Entity Relationship Diagram:
 
@@ -53,11 +57,19 @@ DELETE for deleting a Story
 #Technologies used:
 React
 Redux
-Material UI
+Sagas
+Sharethis
+SweetAlerts
+Swiper
+Axios
+Passport
+Session Cookies
 Node
 Express
-Passport
 PostgreSQL
+US ZIP code API
+Google Maps Javascipt API
+Google Maps Static API
 Heroku
 
 ## Prerequisites
@@ -77,20 +89,24 @@ CREATE TABLE writer (
     id SERIAL PRIMARY KEY,
     username VARCHAR (80) UNIQUE NOT NULL,
     password VARCHAR (1000) NOT NULL,
-    state_usa VARCHAR (80) NOT NULL
+    admin BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE story (
 	id SERIAL PRIMARY KEY,
 	story VARCHAR (1000) NOT NULL,
 	writer_id integer REFERENCES writer NOT NULL,
-	inappropriate VARCHAR (20) NOT NULL
+	zipcode integer NOT NULL,
+	lat double precision NOT NULL,
+	lng double precision NOT NULL,
+	inappropriate BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE favorite (
 	id SERIAL PRIMARY KEY,
 	story_id integer REFERENCES story UNIQUE NOT NULL,
-	writer_id integer REFERENCES writer UNIQUE NOT NULL
+	writer_id integer REFERENCES writer UNIQUE NOT NULL,
+	user_id integer
 );
 ```
 ## Development Setup Instructions
