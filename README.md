@@ -12,10 +12,15 @@ Each Story is a piece of user-generated content from a Writer, a registered/logg
 
 #Usernames/Passwords:
 You are encouraged to Register with a Username/Password combo of your own, but you are welcome to use some existing combos that were used during development:
+
 tympls/ty
+
 tymemphis/ty
+
 tykalispell/ty
+
 tyoakland/ty
+
 tydavis/ty
 
 #Views/Features:
