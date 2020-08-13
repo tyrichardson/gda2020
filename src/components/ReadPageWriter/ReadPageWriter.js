@@ -5,7 +5,6 @@ import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide} from 'swiper/react';
 
 import GoogleMapDB from '../GoogleMap/GoogleMapDB';
-import Sharing from '../Sharing/Sharing';
 
 import 'swiper/swiper-bundle.css';
 
@@ -88,8 +87,6 @@ class ReadPageWriter extends Component {
               <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
               <button onClick={() => this.handleToggleInappropriate(story)}>Inappropriate</button>
               <button onClick={() => this.handleDelete(story)}>Delete</button>
-              <br />
-              <Sharing />
             </div>
           </SwiperSlide>
         )
@@ -117,8 +114,6 @@ class ReadPageWriter extends Component {
               <br />
               <button onClick={() => this.handleClickFavorite(story)}>Add Favorite</button>
               <button onClick={() => this.handleClickInappropriate(story)}>Inappropriate</button>
-              <br />
-              <Sharing />
             </div>
           </SwiperSlide>
         )

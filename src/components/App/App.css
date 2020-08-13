@@ -77,9 +77,15 @@ input {
 .swiperDiv {
   width: 70%;
   text-align: center;
-  margin: 1rem auto;
+  margin: .5rem auto;
   padding: 1rem;
   border: 2px solid lightskyblue;
+}
+
+#sharethis {
+  width: 20%;
+  padding: .5rem 0 0 1rem;
+  margin: 0;
 }
 
 #textEdit {
