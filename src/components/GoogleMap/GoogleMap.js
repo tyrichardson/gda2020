@@ -13,7 +13,12 @@ const config = {
 var url = '';
 var locations = [];
 var markerArray = [];
+
+/*
 var markerIcon = `https://lh3.googleusercontent.com/bsqoF2qeA81gGdClubjd5UlQOtgabyfRBzyhMi4E8BRs9zehvO20pqU2uYORaDZfzhAV-IK44h2a9zM70wErRhDnnNjjDSe4Dyp_nuQyMAT9j-ohYfGc9o4CCF88hdFvRKz0R-Xdb2lQL_52ttKrofpOKhFLrnXptx7MhIBL9gx3cZ6O5ambEiFTmc0RAr0uMrIVPTQ7mpJ2AuWpBdVxiJQHMhaJ4ew2ZElZWnVJDHUOZRWCUWdIymFhavFymVDBvyUFqFCqgUJqBwSZLXyqYjnS3J0s7vp9bG1RlqzXGYsqy0EdqAOqnDopJWJdlupEwoHyljV1pdOVHU9uDR5y1DvUsY1_80pOfa2X7dE9aA7MyfcX6wlut63TVbqK9FSXr6NdtiYjHZebvgttl70JQzeQ8qA-3xnDQ5I3KHD5QBZbaVIULTjXjI2STxD3WPtAUYslohv79LdVm4xkG6FQsXXRQk43RDNAW_wjteYX9-MO2_D52KBQ95ZP5H98kUG4xL36NRaRXzeF91sFlDNvOhCrbc890ESGmgJ_3ZIhY3cF8d58676PgQ0Cp1fYvnB58vSGByqFE9FmhtQ7f4a3JTR8GkiXpuM9Erty8Dyo8-KV4gzIqgcIn5i-I3quEzukfzuMNVWlcT2z-MCXCZfTPa04vmAE46ddNFBEiT7QlIRSDJVkOUW_t8eEO4Fy5w=s32-no?authuser=0`;
+*/
+
+var markerIcon = `https://bit.ly/3hToGa4`;
 
 class GoogleMap extends Component {
 
