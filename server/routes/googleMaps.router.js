@@ -27,9 +27,12 @@ const staticMapIcon = `https://lh3.googleusercontent.com/-uJSgG2XuCgOzzlU3n5P8lY
 
 const staticMapIcon = `https://bit.ly/3hToGa4`
 
-*/
+`https://drive.google.com/file/d/1IIstCWugf02W0bmFRl_D-7rL5wn2SlBE/view?usp=sharing`
 
-const staticMapIcon = `https://drive.google.com/file/d/1IIstCWugf02W0bmFRl_D-7rL5wn2SlBE/view?usp=sharing`
+const staticMapIcon = `https://photos.app.goo.gl/Vh7skX1BDakd1ETd7/water-ring-icon-small.png`
+
+const staticMapIcon = `https://photos.google.com/share/AF1QipOnrikAacIsuzTezlmgBynK3eNGGM7BWPkmrCp9F8S1CKRaqxcT0Z3MRbx51tb66w/photo/AF1QipOloZU0XLMbjadpUJJBEmAGiKD9DwPx_gzz_u87?key=dzlwb19xSDFPNzNxN3BObE9MSGNMTHZQZHJfeU5R`;
+*/
 
 router.get('/latLong', (req, res) => {
         let queryText = 'SELECT "lat", "lng" FROM "story" WHERE "id" = $1;';
@@ -37,8 +40,9 @@ router.get('/latLong', (req, res) => {
         .then((result) => {            
             let lat = parseFloat(result.rows[0].lat);
             let long = parseFloat(result.rows[0].lng);
-            let urlStatic = `http://maps.googleapis.com/maps/api/staticmap?&size=500x250&zoom=10&style=visibility:on&style=feature:water|element:geometry|visibility:on&style=feature:landscape|element:geometry|visibility:on&markers=anchor:center|icon:${staticMapIcon}|${lat},${long}&key=${googleMapsKey}`;
+            let urlStatic = `http://maps.googleapis.com/maps/api/staticmap?&size=500x250&zoom=10&style=visibility:on&style=feature:water|element:geometry|visibility:on&style=feature:landscape|element:geometry|visibility:on&markers=anchor:center|icon:https://drive.google.com/uc?id=1IIstCWugf02W0bmFRl_D-7rL5wn2SlBE|${lat},${long}&key=${googleMapsKey}`;
             res.send(urlStatic);
+            console.log(urlStatic);
         })
         .catch((error) => {
            res.sendStatus(500);

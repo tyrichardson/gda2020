@@ -14,37 +14,33 @@ const config = {
 
 class GoogleMapDB extends Component {
   state = {
-    staticMap: ''
-  }
-
-  getURL = () => {
-    axios.get('/api/googleMaps/latLong', {
-      params: {
-        name: `${this.props.storyID}`
-      }, config
-    })
-    .then((response) => {
-      this.setState({
-        staticMap: response.data
-      });
-    })
-    .catch((error) => {
-      console.log('error in get googleMapDB ', error);
-    })
-  }
+    staticMap: "",
+  };
 
   componentDidMount() {
     this.getURL();
   }
 
+  getURL = () => {
+    axios
+      .get("/api/googleMaps/latLong", {
+        params: {
+          name: `${this.props.storyID}`,
+        },
+        config,
+      })
+      .then((response) => {
+        this.setState({
+          staticMap: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error in get googleMapDB ", error);
+      });
+  };
+
   render() {
-
-    return (
-      
-      <img src={this.state.staticMap} alt="map" id="static-google-map" />
-      
-    );
-
+    return <img src={this.state.staticMap} alt="map" id="static-google-map" />;
   }
 }
 
