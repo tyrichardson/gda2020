@@ -32,6 +32,13 @@ const staticMapIcon = `https://bit.ly/3hToGa4`
 const staticMapIcon = `https://photos.app.goo.gl/Vh7skX1BDakd1ETd7/water-ring-icon-small.png`
 
 const staticMapIcon = `https://photos.google.com/share/AF1QipOnrikAacIsuzTezlmgBynK3eNGGM7BWPkmrCp9F8S1CKRaqxcT0Z3MRbx51tb66w/photo/AF1QipOloZU0XLMbjadpUJJBEmAGiKD9DwPx_gzz_u87?key=dzlwb19xSDFPNzNxN3BObE9MSGNMTHZQZHJfeU5R`;
+
+THE FIX: 
+link from image on Google Drive:
+https://drive.google.com/file/d/1IIstCWugf02W0bmFRl_D-7rL5wn2SlBE/view?usp=sharing
+
+Edited to work:
+https://drive.google.com/uc?id=1IIstCWugf02W0bmFRl_D-7rL5wn2SlBE
 */
 
 router.get('/latLong', (req, res) => {
